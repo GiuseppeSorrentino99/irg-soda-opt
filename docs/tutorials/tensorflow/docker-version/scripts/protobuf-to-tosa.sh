@@ -10,10 +10,10 @@ docker run -u $(id -u):$(id -g) -v $(pwd):/working_dir --rm agostini01/soda \
     --graphdef-to-mlir \
     --tf-input-arrays=vxm_dense_source_input,vxm_dense_target_input \
     --tf-input-data-types=DT_FLOAT,DT_FLOAT \
-    --tf-input-shapes="4,32,288,288,1;4,32,288,288,1 "\
+    --tf-input-shapes="4,32,288,288,1;4,32,288,288,1" \
     --tf-output-arrays=Identity,Identity_1 \
     "$INPUT_GRAPH" \
-    -o tf.mlir
+  -o output/tf.mlir
 
 docker run -u $(id -u):$(id -g) -v $(pwd):/working_dir --rm agostini01/soda \
   tf-opt \
@@ -21,5 +21,5 @@ docker run -u $(id -u):$(id -g) -v $(pwd):/working_dir --rm agostini01/soda \
     --tf-region-control-flow-to-functional \
     --tf-shape-inference \
     --tf-to-tosa-pipeline \
-    tf.mlir \
+  output/tf.mlir \
     -o "$OUTPUT_TOSA"
