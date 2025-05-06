@@ -18,7 +18,7 @@ docker run -u $(id -u):$(id -g) -v $(pwd):/working_dir --rm agostini01/soda \
     --graphdef-to-mlir \
     --tf-input-arrays=fixed,moving \
     --tf-input-data-types=DT_FLOAT,DT_FLOAT \
-    --tf-input-shapes=128,128,128,1:128,128,128,1 \
+    --tf-input-shapes=1,128,128,128,1:1,128,128,128,1 \
     --tf-output-arrays=Identity,Identity_1 \
     $1 \
     -o output/tf.mlir
